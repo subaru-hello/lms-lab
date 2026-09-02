@@ -1,20 +1,20 @@
-# カリキュラム表 — TypeScriptで作るLMS「買った人にだけ動画を見せる」
+# 実装ロードマップ — 壊れるシステム・壊れないシステム / LMS編
 
 **貫く問い: 「買った人にだけ、期限つきで、動画を見せる」をどう実装しきるか。**
 
-総尺目標: 5.9時間 / 9セクション40レクチャー。1本5〜12分。
+9セクション40段。記事・Shortsへの割り付けは docs/distribution.md。
 技術構成: Next.js(App Router) + TypeScript(strict) + Postgres(Drizzle) + Cloudflare R2 + Stripe。S8のみ Cloudflare Stream。
 業務ルールの正: `docs/domain-requirements.md`。収録規約: `docs/recording.md`。
 
 方針:
-- 配布コードは git タグ運用。レクチャーNに `lNN-start` / `lNN-complete` を打つ
+- git タグ運用。段Nに `lNN-start` / `lNN-broken`(該当回のみ) / `lNN-complete` を打つ
 - 逐語台本は作らない。ラフ台本(話す流れ・キーフレーズ・コード手順)は `docs/scripts/` に1セクション1ファイル
 - 山場は「壊れた状態を先に作って実行して見せる → 直す」の型で撮る(詳細は recording.md)
 
 ## S1 導入(25分) ※パイロット収録セクション
 
 - **1.1 完成物デモ(6分)**: 未購入で動画URLを直叩き→403 / 購入後に再生 / 期限を切らして再度403。この3画面をColdOpenで見せる。「これ、ちゃんと作れますか?」
-- **1.2 この講座が答える一つの問いと、作らないもの(6分)**: 貫く問いの提示。CRUD止まりのLMSとの違い。作らないもの(SNSログイン/掲示板/SCORM等)を先に宣言してスコープを閉じる
+- **1.2 このシリーズが答える一つの問いと、作らないもの**: 貫く問いの提示。CRUD止まりのLMSとの違い。作らないもの(SNSログイン/掲示板/SCORM等)を先に宣言してスコープを閉じる
 - **1.3 環境構築とタグの歩き方(6分)**: Node22 + Next.js + Postgres(docker) の起動。`lNN-start`/`lNN-complete` の使い方。エディタは何でもよい(講師はnvim)
 - **1.4 業務ルールを読む(7分)**: domain-requirements.md の10項目を読む。特に「支払いの事実」と「視聴する権利」を分ける話。「この権利、どこに持たせる?」で次章へ
 
