@@ -1,22 +1,36 @@
-# udemy-lms
+# lms-lab — 壊れるシステム・壊れないシステム / LMS編
 
-Udemy講座「TypeScriptで作るLMS: 買った人にだけ動画を見せる、を実装しきる」の制作リポジトリ。
+動画を売るサービス（LMS）を実際に作り、**わざと壊して、壊れている画面を見せてから直す**シリーズの実装リポジトリ。
 
-- 貫く問い・カリキュラム: `docs/curriculum.md`
-- 業務ルールの正: `docs/domain-requirements.md`
-- 収録規約(実装過程の見せ方を含む): `docs/recording.md`
-- ラフ台本: `docs/scripts/sectionNN.md`
+貫く問い: **買った人にだけ、期限つきで、動画を見せる。**
 
 技術構成: Next.js(App Router) + TypeScript(strict) + Postgres(Drizzle) + Cloudflare R2 + Stripe。
 
-## 制作順
+## このリポジトリの読み方
 
-台本を全部書いてから収録に入らない。マイルストーンごとに「実装 → ラフ台本 → 収録 → 通し視聴」を一巡させる。
+レクチャー/記事の単位で git タグを打つ。**壊れている実装もタグとして残す**（ここがこのリポジトリの主眼）。
 
-- M1 パイロット: docs 3点 → S1実装+台本 → Udemyテスト動画審査 → S1収録4本 → 通し視聴で規約確定
-- M2: S2〜S3(データモデルと権限)
-- M3: S4〜S5(山場)
-- M4: S6〜S7(決済と進捗)
-- M5: S8〜S9 + 無料プレビュー設定 + 公開
+```
+lNN-start     その回の開始状態
+lNN-broken    わざと壊れている実装（記事で「破れる」ところ）
+lNN-complete  直したあとの動く状態
+```
 
-**M1 を終えるまで M2 以降の台本を書かない。**
+`git diff lNN-broken lNN-complete` が、そのまま「何が足りなかったか」の答えになる。
+
+## 5つの破れ方
+
+| # | 何が起きるか | タグ |
+|---|---|---|
+| 1 | 公開バケットに置いた動画URLは、シークレットウィンドウで誰でも再生できる | `l41-broken` |
+| 2 | m3u8だけ署名しても、セグメントが素通しで落とせる | `l52-broken` |
+| 3 | 署名の寿命を10秒にすると、90分の動画は途中で止まる | `l54-broken` |
+| 4 | 決済の成功リダイレクトを直叩きすると、払わずに受講権が手に入る | `l62-broken` |
+| 5 | 同じWebhookを二度投げると、受講権が二重に増える | `l63-broken` |
+
+## ドキュメント
+
+- `docs/curriculum.md` — 実装ロードマップ（9セクション40段）
+- `docs/domain-requirements.md` — 業務ルールの正
+- `docs/distribution.md` — 記事とShortsへの割り付け
+- `docs/recording.md` — Short収録規約
