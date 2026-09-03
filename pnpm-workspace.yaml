@@ -4,3 +4,4 @@
 # pnpm 11 では package.json の "pnpm" フィールドは読まれない。設定はここに書く。
 allowBuilds:
   esbuild: true
+  workerd: true

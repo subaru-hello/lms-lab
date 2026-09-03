@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lms-lab-video",
+  "main": "index.ts",
+  "compatibility_date": "2026-09-01",
+  "observability": { "enabled": true },
+  // R2 バインディング。S3のアクセスキーは要らない。
+  "r2_buckets": [{ "binding": "VIDEOS", "bucket_name": "lms-lab-videos" }]
+  // SIGNING_SECRET は wrangler secret put で入れる(リポジトリには置かない)
+}
