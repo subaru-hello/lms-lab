@@ -1,10 +1,12 @@
 node_modules/
 .next/
-.env*
+.env
 !.env.example
 dist/
 coverage/
+media/
 *.mp4
 *.mkv
 *.mov
-media/
+*.ts.timestamp-*
+tsconfig.tsbuildinfo

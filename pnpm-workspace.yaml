@@ -1,0 +1,6 @@
+# pnpm 10 以降、依存パッケージのビルドスクリプトは既定でブロックされる。
+# 許可しないと install が ERR_PNPM_IGNORED_BUILDS で終了コード1になり、
+# typecheck も test もその手前で落ちる。
+# pnpm 11 では package.json の "pnpm" フィールドは読まれない。設定はここに書く。
+allowBuilds:
+  esbuild: true
