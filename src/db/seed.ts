@@ -1,3 +1,4 @@
+import { hashPassword } from '../lib/password';
 import { db, schema } from './index';
 
 /**
@@ -5,17 +6,19 @@ import { db, schema } from './index';
  * 受講者Aは有効なEnrollment、受講者Bは期限切れ。403の実演に使う。
  */
 async function main() {
+  // 開発用。全員 'password' で入れる。
+  const pw = await hashPassword('password');
   const [instructor] = await db
     .insert(schema.users)
-    .values({ email: 'instructor@example.com', passwordHash: 'dev', role: 'instructor' })
+    .values({ email: 'instructor@example.com', passwordHash: pw, role: 'instructor' })
     .returning();
   const [alice] = await db
     .insert(schema.users)
-    .values({ email: 'alice@example.com', passwordHash: 'dev' })
+    .values({ email: 'alice@example.com', passwordHash: pw })
     .returning();
   const [bob] = await db
     .insert(schema.users)
-    .values({ email: 'bob@example.com', passwordHash: 'dev' })
+    .values({ email: 'bob@example.com', passwordHash: pw })
     .returning();
   if (!instructor || !alice || !bob) throw new Error('failed to seed users');
 

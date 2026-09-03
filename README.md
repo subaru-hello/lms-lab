@@ -13,7 +13,8 @@
 ```
 lNN-start     その回の開始状態
 lNN-broken    わざと壊れている実装（記事で「破れる」ところ）
-lNN-complete  直したあとの動く状態
+lNN-gate      途中の到達点（関門は立ったが、その段はまだ終わっていない）
+lNN-complete  その段が終わって動く状態
 ```
 
 `git diff lNN-broken lNN-complete` が、そのまま「何が足りなかったか」の答えになる。
